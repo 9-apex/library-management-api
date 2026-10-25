@@ -1,0 +1,56 @@
+{
+  "info": {
+    "_postman_id": "library-management-api-local-export",
+    "name": "Library Management API",
+    "description": "Django REST Framework library project. Replace YOUR_ADMIN_PASSWORD before using Login. Add the returned access token to the access_token variable for protected requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"yuki\",\n  \"password\": \"YOUR_ADMIN_PASSWORD\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{base_url}}/api/login/"
+      }
+    },
+    {
+      "name": "Profile",
+      "request": {
+        "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{access_token}}", "type": "string" }] },
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/profile/"
+      }
+    },
+    {
+      "name": "Filter Books by Category",
+      "request": {
+        "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{access_token}}", "type": "string" }] },
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/books/?category=1"
+      }
+    },
+    {
+      "name": "Delete Book",
+      "request": {
+        "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{access_token}}", "type": "string" }] },
+        "method": "DELETE",
+        "header": [],
+        "url": "{{base_url}}/api/books/{{book_id}}/",
+        "description": "Set book_id to an existing book ID before sending."
+      }
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8000", "type": "string" },
+    { "key": "access_token", "value": "", "type": "string" },
+    { "key": "book_id", "value": "2", "type": "string" }
+  ]
+}
